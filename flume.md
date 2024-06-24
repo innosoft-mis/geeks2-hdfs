@@ -11,7 +11,7 @@ Dataset Explanations: Multiple CSV format files are on a local path. The data in
 
 Investigate files on local directory
 ```
-$ cd ~/lab2
+$ cd ~/flume_data
 $ head -n 10 flume_data/001.csv
 $ head -n 10 flume_data/002.csv
 $ head -n 10 flume_data/003.csv
