@@ -51,7 +51,7 @@ agent1.sinks.sink1.hdfs.writeFormat = Text
 ```
 #### 4)	Start a FLUME agent to ingest files into HDFS
 ```
-$ flume-ng agent -n cloudera_agent -f flume.conf -Xms1024m -Xmx2048m
+$ flume-ng agent -n agent1 -f flume.conf -Xms1024m -Xmx2048m
 ```
 NOTE: -Xms and –Xmx is memory configurable for Flume Java Heap
 #### 5) View the result on HDFS
