@@ -1,4 +1,4 @@
-# Lab 2: Get Log Data with Flume
+# Lab XX: Get Log Data with Flume
 
 - [Upload multiple files to HDFS using FLUME](#upload-multiple-files-to-hdfs-using-flume)
 - [Stream Log data from Syslog to HDFS](#stream-log-data-from-syslog-to-hdfs)
@@ -22,9 +22,9 @@ hadoop fs -mkdir /user/student/flume_output
 ```
 #### 2) Create a FLUME configuration file to spool a local directory
 Investigate files on local directory
-```
-$ cd ~/lab2
-$ gedit flume.conf &
+```sh
+cd ~/flume_data
+gedit flume.conf &
 ```
 #### 3) Flume Configuration File (flume.conf)
 ```
