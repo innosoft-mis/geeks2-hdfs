@@ -100,7 +100,7 @@ a1.sources.src1.channels = ch1
 a1.sinks.sink1.type = hdfs
 a1.sinks.sink1.channel = ch1
 a1.sinks.sink1.hdfs.path = /user/student/syslog
-a1.sinks.sink1.hdfs.batchSize = 10000
+a1.sinks.sink1.hdfs.batchSize = 5000
 a1.sinks.sink1.hdfs.rollSize = 512000
 a1.sinks.sink1.hdfs.fileType = DataStream
 a1.sinks.sink1.hdfs.writeFormat = Text
@@ -153,8 +153,8 @@ hadoop fs -cat syslog/*
 #### 1)	Read data from log file to flume
 Investigate files on local directory
 ```
-$ cd ~/lab2
-$ gedit readlog.conf &
+cd ~
+nano readlog.conf
 ```
 
 #### 2)	Flume Configuration File (readlog.conf)
@@ -171,8 +171,8 @@ a1.sources.src1.channels = ch1
 # Describe the sink
 a1.sinks.sink1.type = hdfs
 a1.sinks.sink1.channel = ch1
-a1.sinks.sink1.hdfs.path = /user/cloudera/dmessages
-a1.sinks.sink1.hdfs.batchSize = 10000
+a1.sinks.sink1.hdfs.path = /user/student/dmessages
+a1.sinks.sink1.hdfs.batchSize = 5000
 a1.sinks.sink1.hdfs.rollSize = 512000
 a1.sinks.sink1.hdfs.fileType = DataStream
 a1.sinks.sink1.hdfs.writeFormat = Text
