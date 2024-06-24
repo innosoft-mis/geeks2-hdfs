@@ -23,34 +23,61 @@ hadoop fs -mkdir /user/student/flume_output
 #### 2) Create a FLUME configuration file to spool a local directory
 Investigate files on local directory
 ```sh
-cd ~/flume_data
+cd ~
 gedit flume.conf &
 ```
 #### 3) Flume Configuration File (flume.conf)
-```
-cloudera_agent.sources = src1
-cloudera_agent.channels = ch1
-cloudera_agent.sinks = sink1
+```sh
+# Name of the agent
+agent1.sources = source1
+agent1.sinks = sink1
+agent1.channels = channel1
 
-cloudera_agent.sources.src1.type = spooldir
-cloudera_agent.sources.src1.channels = ch1
-cloudera_agent.sources.src1.spoolDir = /home/cloudera/lab2/flume_data
-cloudera_agent.sources.src1.batchSize = 1000
+# Configuring the source
+agent1.sources.source1.type = spooldir
+agent1.sources.source1.spoolDir = /home/student/flume_data
+agent1.sources.source1.batchSize = 1000
+agent1.sources.source1.channels = channel1
 
-cloudera_agent.channels.ch1.type = memory
-cloudera_agent.channels.ch1.capacity = 100000000
-cloudera_agent.channels.ch1.transactionCapacity = 5000
+# Configuring the channel
+agent1.channels.channel1.type = memory
+agent1.channels.channel1.capacity = 10000000
+agent1.channels.channel1.transactionCapacity = 5000
 
-cloudera_agent.sinks.sink1.type = hdfs
-cloudera_agent.sinks.sink1.channel = ch1
-cloudera_agent.sinks.sink1.hdfs.batchSize = 5000
-cloudera_agent.sinks.sink1.hdfs.path = /user/cloudera/flume_output
-cloudera_agent.sinks.sink1.hdfs.filePrefix = log-output
-cloudera_agent.sinks.sink1.hdfs.rollSize = 5120000
-cloudera_agent.sinks.sink1.hdfs.rollInterval = 10
-cloudera_agent.sinks.sink1.hdfs.rollCount = 0
-cloudera_agent.sinks.sink1.hdfs.fileType = DataStream
-cloudera_agent.sinks.sink1.hdfs.writeFormat = Text
+
+# Configuring the sink
+agent1.sinks.sink1.type = avro
+agent1.sinks.sink1.hostname = localhost
+agent1.sinks.sink1.port = 55051
+agent1.sinks.sink1.batch-size = 5000
+agent1.sinks.sink1.channel = channel1
+
+# Name of the agent
+agent2.sources = source2
+agent2.sinks = sink2
+agent2.channels = channel2
+
+# Configuring the source
+agent2.sources.source2.type = avro
+agent2.sources.source2.bind = 0.0.0.0
+agent2.sources.source2.port = 55051
+agent2.sources.source2.channels = channel2
+
+# Configuring the channel
+agent2.channels.channel2.type = memory
+agent2.channels.channel2.capacity = 1000000
+agent2.channels.channel2.transactionCapacity = 5000
+
+# Configuring the sink
+agent2.sinks.sink2.type = hdfs
+agent2.sinks.sink2.batchSize = 5000
+agent2.sinks.sink2.hdfs.path = /user/student/flume_output
+agent2.sinks.sink2.hdfs.fileType = DataStream
+agent2.sinks.sink2.hdfs.writeFormat = Text
+agent2.sinks.sink2.hdfs.rollInterval = 10
+agent2.sinks.sink2.hdfs.rollSize = 0
+agent2.sinks.sink2.hdfs.rollCount = 100
+agent2.sinks.sink2.channel = channel2
 ```
 #### 4)	Start a FLUME agent to ingest files into HDFS
 ```
