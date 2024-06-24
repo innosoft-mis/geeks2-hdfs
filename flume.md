@@ -185,7 +185,7 @@ a1.channels.ch1.transactionCapacity = 5000
 
 #### 3)	Start a FLUME agent to ingest files into HDFS
 ```
-$ flume-ng agent -n a1 -f readlog.conf -Xms1024m -Xmx2048m
+flume-ng agent -n a1 -f readlog.conf -Xms1024m -Xmx2048m
 ```
 NOTE: -Xms and –Xmx is memory configurable for Flume Java Heap
 
@@ -195,11 +195,11 @@ NOTE: -Xms and –Xmx is memory configurable for Flume Java Heap
 ```
 Generate log data
 ```
-$ sudo su -c 'echo HELLO > /dev/kmsg'
-$ dmesg
-$ sudo su -c "dmesg > /var/log/dmesg"
+sudo su -c 'echo HELLO > /dev/kmsg'
+sudo dmesg
+sudo su -c "dmesg > /var/log/dmesg"
 ```
 View the result on HDFS 
 ```
-$ hdfs dfs -cat dmessages/*
+hdfs dfs -cat dmessages/*
 ```
