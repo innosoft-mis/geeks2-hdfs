@@ -27,7 +27,7 @@ cd ~
 gedit flume.conf &
 ```
 #### 3) Flume Configuration File (flume.conf)
-```sh
+```cnf
 agent1.sources = src1
 agent1.channels = ch1
 agent1.sinks = sink1
@@ -59,7 +59,7 @@ View the result on HDFS
 ```
 [Open new terminal]
 
-$ hdfs dfs -cat flume_output/*
+hdfs dfs -cat flume_output/*
 ```
 
 ## Stream Log data from Syslog to HDFS
