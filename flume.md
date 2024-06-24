@@ -76,13 +76,13 @@ hadoop fs -mkdir /user/student/syslog
 
 #### 2)	Create a FLUME configuration file to listen syslog port
 Investigate files on local directory
-```
-$ cd ~
-$ gedit rsyslog.conf &
+```sh
+cd ~
+gedit flume_rsyslog.conf &
 ```
 
-#### 3)	Flume Configuration File (rsyslog.conf)
-```
+#### 3)	Flume Configuration File (flume_rsyslog.conf)
+```cnf
 # Name the components on this agent
 a1.sources = src1
 a1.sinks = sink1
@@ -113,39 +113,39 @@ a1.channels.ch1.transactionCapacity = 5000
 
 #### 4)	Start a rsyslog service
 Modified the /etc/rsyslog.conf
-```
-$ sudo gedit /etc/rsyslog.conf &
+```sh
+sudo gedit /etc/rsyslog.conf &
 ```
 Provides TCP syslog reception
-```
+```cnf
 # Provides TCP syslog reception
 $ModLoad imtcp
 $InputTCPServerRun 514
 *.*	@@localhost:5140
 ```
 Start a rsyslog service
-```
-$ sudo service rsyslog restart
+```sh
+sudo service rsyslog restart
 ```
 
 #### 5)	Start a FLUME agent to ingest files into HDFS
-```
-$ flume-ng agent -n a1 -f rsyslog.conf -Xms1024m -Xmx2048m
+```sh
+flume-ng agent -n a1 -f flume_rsyslog.conf -Xms1024m -Xmx2048m
 ```
 NOTE: -Xms and –Xmx is memory configurable for Flume Java Heap
 
 #### 6)	Test log forward to HDFS
-```
+```sh
 [Open new terminal]
 ```
 Generate log data
-```
-$ logger -t test 'testing flume with syslog'
-$ sudo cat /var/log/messages
+```sh
+logger -t test 'testing flume with syslog'
+sudo cat /var/log/messages
 ```
 View the result on HDFS 
-```
-$ hdfs dfs -cat syslog/*
+```sh
+hadoop fs -cat syslog/*
 ```
 
 ## Read data from single file to HDFS
