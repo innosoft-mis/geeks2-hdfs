@@ -78,7 +78,7 @@ hadoop fs -mkdir /user/student/syslog
 Investigate files on local directory
 ```sh
 cd ~
-gedit flume_rsyslog.conf &
+nano flume_rsyslog.conf
 ```
 
 #### 3)	Flume Configuration File (flume_rsyslog.conf)
@@ -114,7 +114,7 @@ a1.channels.ch1.transactionCapacity = 5000
 #### 4)	Start a rsyslog service
 Modified the /etc/rsyslog.conf
 ```sh
-sudo gedit /etc/rsyslog.conf &
+sudo nano /etc/rsyslog.d/flume.conf
 ```
 Provides TCP syslog reception
 ```cnf
@@ -141,7 +141,7 @@ NOTE: -Xms and –Xmx is memory configurable for Flume Java Heap
 Generate log data
 ```sh
 logger -t test 'testing flume with syslog'
-sudo cat /var/log/messages
+cat /var/log/syslog 
 ```
 View the result on HDFS 
 ```sh
