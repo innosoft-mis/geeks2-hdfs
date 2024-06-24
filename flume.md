@@ -119,9 +119,9 @@ sudo nano /etc/rsyslog.d/flume.conf
 Provides TCP syslog reception
 ```cnf
 # Provides TCP syslog reception
-$ModLoad imtcp
-$InputTCPServerRun 514
-*.*	@@localhost:5140
+module(load="imtcp")
+input(type="imtcp" port="514")
+*.*     @@localhost:5140
 ```
 Start a rsyslog service
 ```sh
