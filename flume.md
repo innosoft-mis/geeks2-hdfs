@@ -17,8 +17,8 @@ head -n 10 flume_data/002.csv
 head -n 10 flume_data/003.csv
 ```
 Create output directory on HDFS
-```
-$ hdfs dfs -mkdir /user/cloudera/flume_output
+```sh
+hadoop fs -mkdir /user/cloudera/flume_output
 ```
 #### 2) Create a FLUME configuration file to spool a local directory
 Investigate files on local directory
