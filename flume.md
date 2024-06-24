@@ -31,13 +31,16 @@ gedit flume.conf &
 agent1.sources = src1
 agent1.channels = ch1
 agent1.sinks = sink1
+
 agent1.sources.src1.type = spooldir
 agent1.sources.src1.channels = ch1
 agent1.sources.src1.spoolDir = /home/student/flume_data
 agent1.sources.src1.batchSize = 1000
+
 agent1.channels.ch1.type = memory
 agent1.channels.ch1.capacity = 100000000
 agent1.channels.ch1.transactionCapacity = 5000
+
 agent1.sinks.sink1.type = hdfs
 agent1.sinks.sink1.channel = ch1
 agent1.sinks.sink1.hdfs.batchSize = 5000
@@ -54,26 +57,27 @@ agent1.sinks.sink1.hdfs.writeFormat = Text
 $ flume-ng agent -n agent1 -f flume.conf -Xms1024m -Xmx2048m
 ```
 NOTE: -Xms and –Xmx is memory configurable for Flume Java Heap
+
 #### 5) View the result on HDFS
 View the result on HDFS  
 ```
 [Open new terminal]
 
-hdfs dfs -cat flume_output/*
+hadoop fs -cat flume_output/*
 ```
 
 ## Stream Log data from Syslog to HDFS
 
 #### 1)	Import data from Syslog to HDFS using Flume
 Create output directory on HDFS
-```
-$ hdfs dfs -mkdir /user/cloudera/syslog
+```sh
+hadoop fs -mkdir /user/student/syslog
 ```
 
 #### 2)	Create a FLUME configuration file to listen syslog port
 Investigate files on local directory
 ```
-$ cd ~/lab2
+$ cd ~
 $ gedit rsyslog.conf &
 ```
 
@@ -95,7 +99,7 @@ a1.sources.src1.channels = ch1
 # Describe the sink
 a1.sinks.sink1.type = hdfs
 a1.sinks.sink1.channel = ch1
-a1.sinks.sink1.hdfs.path = /user/cloudera/syslog
+a1.sinks.sink1.hdfs.path = /user/student/syslog
 a1.sinks.sink1.hdfs.batchSize = 10000
 a1.sinks.sink1.hdfs.rollSize = 512000
 a1.sinks.sink1.hdfs.fileType = DataStream
