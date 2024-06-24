@@ -10,11 +10,11 @@
 Dataset Explanations: Multiple CSV format files are on a local path. The data in the files is banking transactions.  
 
 Investigate files on local directory
-```
-$ cd ~/flume_data
-$ head -n 10 flume_data/001.csv
-$ head -n 10 flume_data/002.csv
-$ head -n 10 flume_data/003.csv
+```sh
+cd ~/flume_data
+head -n 10 flume_data/001.csv
+head -n 10 flume_data/002.csv
+head -n 10 flume_data/003.csv
 ```
 Create output directory on HDFS
 ```
